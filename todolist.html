@@ -1,0 +1,86 @@
+<html lang="en-us">
+<head>
+  <title> Simple ToDo List </title>
+</head>
+<body>
+  <h1> Simple Todo List </h1>
+  <small>By Ian</small>
+  <section>
+    <ul>
+      <li>Sample Todo <a class="remove" href="#">X</a></li>
+    </ul>
+  <form>
+    <input type="text" name="todo">
+  </form>
+  </section>
+<style>
+  body {
+    font-family: Arial;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    margin: 1px;
+    font-size: 25px;
+    padding: 8px;
+    height: 35px;
+    width: 600px;
+    border: 1px solid silver;
+    background: #dbdbdb;
+  }
+  input {
+    font-size: 25px;
+    height: 50px;
+    width: 619px;
+  }
+  .remove {
+    font-size: 25px;
+    float: right;
+  }
+</style>
+<script>
+  const section = document.querySelector("section")
+  const ul = document.querySelector("ul")
+  const x_links = document.querySelectorAll(".remove")
+  const form = document.querySelector("form");
+  const input = document.querySelector("input")
+
+  var load_todo = (todos) => {
+    if (!todos|| todos == undefined)
+      localStorage.setItem("todos", "");
+    else
+      ul.innerHTML = localStorage.getItem("todos");
+  }
+
+  var make_link = () => {
+    let remove_link = document.createElement('a')
+    let text = document.createTextNode("X")
+    remove_link.setAttribute("href", "#")
+    remove_link.setAttribute("class", "remove")
+    remove_link.innerHTML = "X"
+  
+    return (remove_link)
+  }
+  
+  form.addEventListener("submit", (event) => {
+    var make_todo = () => {
+      let todo = input.value.toString()
+      let node = document.createElement('li')
+      let text = document.createTextNode(todo)
+    
+      node.appendChild(text)
+      node.appendChild(make_link());
+      ul.appendChild(node)
+      name.value = ''
+      localStorage.setItem("todos", ul.innerHTML)
+    }
+    if (input.value)
+      make_todo()
+  })
+  
+  load_todo(ul.innerHTML)  
+</script>
+</body>
+</html>
