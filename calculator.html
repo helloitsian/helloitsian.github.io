@@ -8,11 +8,14 @@
     <h1> Simple JS Calculator </h1>
   </nav>
   <section class="calc">
+    <div class="output_area">
+    0
+    </div>
     <table>
       <tr>
         <td><button class="number" id="7">7</button></td>
 	      <td><button class="number" id="8">8</button></td>
-  	    <td><button class="number" id="9">7</button></td>
+  	    <td><button class="number" id="7">7</button></td>
 	      <td><button class="sign" id="/">/</button></td>
       </tr>
       <tr>
@@ -30,7 +33,7 @@
       <tr>
         <td><button class="number" id="0">0</button></td>
         <td><button class="number" id=".">.</button></td>
-        <td><button class="sign" id="=">=</button></td>
+        <td><button class="equals" id="=">=</button></td>
         <td><button class="sign" id="+">+</button></td>
       </tr>
   </section>
@@ -49,12 +52,14 @@
       default: return ("error");
     }
   }
-  var assignSignsAndNumbers = (div_element) => {
+
+  var assignSignsAndNumbers = (div_element, output) => {
     const id = div_element.getAttribute('id')
     const _class = div_element.getAttribute('class')
+   
     if (id === '=')
     {
-      console.log(addSubtractMultiplyDivide(first_number, sign, second_number));
+      output.innerHTML = addSubtractMultiplyDivide(first_number, sign, second_number);
       sign = ""
       first_number = ""
       second_number = ""
@@ -62,20 +67,32 @@
     if (_class === 'number')
     {
       if (!sign)
+      {
         first_number += id
+        output.innerHTML = first_number;
+      }
       else if (sign)
+      {
         second_number += id
+        output.innerHTML = first_number + " " + sign + " " + second_number;
+      }
     }
     else if (_class === 'sign')
+    {
       sign = div_element.getAttribute('id')
-    console.log(first_number, second_number, sign)
-  }
+      output.innerHTML = first_number + " " + sign;
+    }
+    console.log(first_number, sign, second_number)
+}
+  
   const buttons = document.querySelectorAll("button")
+  var   output = document.querySelector(".output_area");
+  console.log(output);
   var first_number = ""
   var second_number = ""
-  var sign;
+  var sign
   for (var i = 0; i < buttons.length; i++)
-    buttons[i].addEventListener("click", (event) => assignSignsAndNumbers(event.target))
+    buttons[i].addEventListener("click", (event) => assignSignsAndNumbers(event.target, output))
 
 </script>
 
@@ -89,6 +106,10 @@ button {
   font-size: 25px;
   width: 70px;
   height: 40px;
+}
+.equals {
+  background: #4286f4;
+  color: white;
 }
 .sign {
   background: #c4c4c4;
