@@ -1,0 +1,80 @@
+<html>
+</head>
+	<title>Simple Currency Converter</title>
+</head>
+<body>
+<section class="main">
+	<h1>Simple USD->Euros Converter</h1>
+	<a href="https://www.github.com/helloitsian/simple-currency-converter">Github Repo.</a>
+	<small>1 USD is Equal to</small>
+	<h2>0.94 Euro</h2>
+	<form>
+		<input type="text" name="currency1" autofocus> <b> USD </b>
+		<br>
+		<input type="text" name="currency2"> <b> Euro </b>
+	</form>
+<footer>
+	Ian Murawski <a href="https://www.github.com/helloitsian">My Github</a> <a href="https://www.twitter.com/42usian">My Twitter</a>
+</footer>
+</section>
+<script>
+const conversions = {
+	"euro" : 0.939452,
+	"yen" : 114.507
+}
+var currencyOne, currencyTwo
+
+const form = document.querySelectorAll('input')
+var currentConv = 'euro';
+form[0].addEventListener('input', (e) => {
+	let result
+	currencyOne = form[0].value - 0
+	result = currencyOne * conversions[currentConv]
+	if (!result)
+		form[1].value = '';
+	else
+		form[1].value = result.toFixed(2)
+})
+form[1].addEventListener('input', (e) => {
+	let result
+	currencyTwo = form[1].value - 0
+	result = currencyTwo / conversions[currentConv]
+	if (!result)
+		form[0].value = '';
+	else
+		form[0].value = result.toFixed(2)
+})
+</script>
+<style>
+body {
+	font-family: Arial;
+	color: #474747;
+}
+h2 {
+	font-weight: normal;
+}
+b {
+	font-size: 25px;
+}
+a {
+	color: #fc5d28;
+}
+input {
+	height: 50px;
+	width: 120px;
+	font-size: 25px;
+	border: none;
+	border-bottom: 1px solid #474747;
+	margin-right: 10px;
+}
+.main {
+	padding: 10px;
+	border: 2px solid #b2cfff;
+	width: 400px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+</style>
+</body>
+</html>
