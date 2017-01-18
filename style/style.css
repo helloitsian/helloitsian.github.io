@@ -30,6 +30,7 @@ a {
   margin: auto;
   right: 0;
   left: 0;
+  height: 85vh;
   width: 300px;
   margin-bottom: 100px;
 }
@@ -57,7 +58,7 @@ a {
 }
 
 @media (max-width: 750px) {
-  .banner {
+  .intro {
     font-size: 200%;
   }
 }
